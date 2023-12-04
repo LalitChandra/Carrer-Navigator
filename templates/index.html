@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Category Prediction</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #3498db, #2c3e50);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            color: #fff;
+            overflow: hidden;
+            /* Hide overflow to prevent scrollbar during animation */
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            width: 100px;
+        }
+
+        .logo-name {
+            font-size: 2.2em;
+            margin-left: 1px;
+            color: #fff;
+        }
+
+        nav {
+            display: flex;
+        }
+
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #fff;
+            font-size: 1.2em;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #3498db;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            margin: auto;
+        }
+
+        h1 {
+            color: #fff;
+            font-size: 3em;
+            margin-bottom: 30px;
+            opacity: 0;
+            transform: translateY(-50px);
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+        }
+
+        form {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            max-width: 500px;
+            width: 100%;
+            margin: auto;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+        }
+
+        .loader-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+
+        .loader {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 10px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        body.loaded h1,
+        body.loaded form {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h1.loaded,
+        form.loaded {
+            animation: fadeInUp 1s ease-in-out, slideInCenter 1s ease-in-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInCenter {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            border: 2px solid #3498db;
+            border-radius: 6px;
+            font-size: 1em;
+            resize: none;
+        }
+
+        input[type="submit"] {
+            display: inline-block;
+            background-color: #3498db;
+            color: #fff;
+            padding: 15px 30px;
+            text-decoration: none;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.5em;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #2980b9;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="loader-container" id="loader-container">
+        <div class="loader"></div>
+        <p style="color: white;">Predicting the role that suits your skills...</p>
+    </div>
+
+    <header>
+        <div class="logo">
+            <img src="../static/logo.png" alt="University of Windsor">
+            <span class="logo-name">CareerNavigator</span>
+        </div>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/aboutus">About</a>
+            <a href="/index">Predictor</a>
+        </nav>
+    </header>
+    <div class="container">
+        <h1 class="loaded">Job Category <br>Prediction</h1>
+        <form class="loaded" action="/predict" method="post" onsubmit="showLoader()">
+            <label for="skills">Enter your skills:</label>
+            <textarea id="skills" name="skills" rows="4" cols="50" placeholder="E.g., Java, Python, Machine Learning"
+                required></textarea><br><br>
+            <input class="btn" type="submit" value="Submit">
+        </form>
+    </div>
+
+    <script>
+        function showLoader() {
+            document.getElementById('loader-container').style.display = 'flex';
+            setTimeout(function () {
+                document.getElementById('loader-container').style.display = 'none';
+            }, 5000);
+        }
+
+        document.body.classList.add('loaded');
+    </script>
+</body>
+
+</html>

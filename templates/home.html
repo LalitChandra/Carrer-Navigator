@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #3498db, #2c3e50);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            color: #fff;
+            overflow: hidden;
+            /* Hide overflow to prevent scrollbar during animation */
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            width: 100px;
+        }
+
+        .logo-name {
+            font-size: 2.2em;
+            margin-left: 1px;
+            color: #fff;
+        }
+
+        nav {
+            display: flex;
+        }
+
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #fff;
+            font-size: 1.2em;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #3498db;
+        }
+
+        .container {
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 1.5s ease-in-out forwards;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #3498db;
+        }
+
+        h3 {
+            font-size: 1.8em;
+            margin-bottom: 30px;
+            color: #ecf0f1;
+        }
+
+        div a {
+            display: inline-block;
+            background-color: #3498db;
+            color: #fff;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 1.5em;
+            transition: background-color 0.3s;
+        }
+
+        div a:hover {
+            background-color: #2980b9;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="../static/logo.png" alt="University of Windsor">
+            <span class="logo-name">CareerNavigator</span>
+        </div>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/aboutus">About</a>
+            <a href="/index">Predictor</a>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>Unlock Your Full Potential!<br> Unsure about the perfect role for your unique skills?</h1>
+        <h3>Fear not! You're in the right place to dispel uncertainties and discover your ideal match.</h3>
+        <a href="/aboutus">Click here to find more</a>
+    </div>
+</body>
+
+</html>

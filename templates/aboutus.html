@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: linear-gradient(to right, #3498db, #2c3e50);
+            color: #fff;
+            overflow-x: hidden;
+            /* Prevent horizontal scrolling */
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            width: 100px;
+        }
+
+        .logo-name {
+            font-size: 2.2em;
+            margin-left: 1px;
+            color: #fff;
+        }
+
+        nav {
+            display: flex;
+        }
+
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #fff;
+            font-size: 1.2em;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #3498db;
+        }
+
+        .content {
+            width: 80%;
+            max-width: 800px;
+            padding: 40px;
+            margin-top: 160px;
+            margin-bottom: 80px;
+            z-index: 1;
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
+            opacity: 0;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #3498db;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.2em;
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .panda-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            cursor: pointer;
+            z-index: 2;
+            transition: transform 0.3s ease-out;
+            /* Smooth transition */
+        }
+
+        .panda {
+            width: 150px;
+            height: 150px;
+            animation: jump 0.5s infinite alternate;
+            cursor: pointer;
+        }
+
+        @keyframes jump {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(-10px);
+            }
+        }
+
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        body.loaded .content {
+            animation: fadeIn 1s ease-out;
+            animation-fill-mode: forwards;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="../static/logo.png" alt="University of Windsor">
+            <span class="logo-name">CareerNavigator</span>
+        </div>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/aboutus">About</a>
+            <a href="/index">Predictor</a>
+        </nav>
+    </header>
+    <div class="content">
+        <h1>Job Role Predictor</h1>
+        <p>Welcome to our innovative project that revolutionizes the job search experience! Our cutting-edge platform
+            utilizes the power of machine learning to streamline the employment process for users like you.</p>
+        <p>How does it work? It's simple yet sophisticated. Users input their list of skills, and our advanced machine
+            learning model, meticulously trained on a diverse dataset of resumes, goes to work. Leveraging the wealth of
+            information in its training data, the model accurately predicts the most suitable job roles based on the
+            provided skills.</p>
+        <p>No more navigating through endless job listings or feeling uncertain about your career path. Our project
+            harnesses the capabilities of artificial intelligence to deliver personalized job recommendations tailored
+            to your unique skill set. It's a game-changer in the job market, offering efficiency and precision to
+            guide you towards the opportunities that align with your strengths.</p>
+        <p>Discover the future of job searching with our project – where technology meets talent to open doors to
+            your next career adventure.</p>
+    </div>
+
+    <div class="panda-container" onclick="loadIndexPage()">
+        <img src="{{ url_for('static', filename='panda2.png') }}" alt="Panda with Poster" class="panda" id="panda">
+    </div>
+
+
+
+    <script>
+        function loadIndexPage() {
+            window.location.href = "{{ url_for('index') }}";
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            document.body.classList.add('loaded');
+        });
+    </script>
+</body>
+
+</html>
